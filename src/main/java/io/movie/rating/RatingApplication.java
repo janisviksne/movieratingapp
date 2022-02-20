@@ -10,4 +10,7 @@ public class RatingApplication {
 		SpringApplication.run(RatingApplication.class, args);
 	}
 
+
+
+
 }
