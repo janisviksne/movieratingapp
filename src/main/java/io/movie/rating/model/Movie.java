@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 import javax.persistence.*;
 
 @Entity @ToString
@@ -16,22 +15,22 @@ public class Movie {
     @Column(name = "MovieID")
     private int movieID;
 
-    @Column(name = "MovieTitle")
-    private String movieTitle;
+    @Column(name = "Title", nullable = false, length = 60)
+    private String title;
 
-    @Column(name = "MovieDescription")
-    private String movieDescription;
+    @Column(name = "Description", nullable = false, length = 200)
+    private String description;
 
-    @Column(name = "MovieLength")
-    private double movieLength;
+    @Column(name = "Length", nullable = false)
+    private double length;
 
-    @Column(name = "MovieRating")
-    private float movieRating;
+    @Column(name = "Rating")
+    private float rating;
 
-    public Movie(String movieTitle, String movieDescription, double movieLength) {
-        this.movieTitle = movieTitle;
-        this.movieDescription = movieDescription;
-        this.movieLength = movieLength;
-        this.movieRating = 0;
+    public Movie(String title, String description, double length, float rating) {
+        this.title = title;
+        this.description = description;
+        this.length = length;
+        this.rating = 0;
     }
 }

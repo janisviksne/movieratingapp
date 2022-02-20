@@ -30,13 +30,13 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
-    public Movie addNewMovie(String movieTitle, String movieDescription, double movieLength) throws Exception {
-        Movie findMovie = movieRepo.findByTitleAndDescription(movieTitle, movieDescription);
+    public Movie addNewMovie(String title, String description, double length, float rating) throws Exception {
+        Movie findMovie = movieRepo.findByTitleAndDescription(title, description);
 
         if (!Objects.isNull(findMovie)){
             System.out.println("LOG THAT THIS MOVIE ALREADY EXISTS");
         } else{
-            Movie newMovie = new Movie(movieTitle, movieDescription, movieLength);
+            Movie newMovie = new Movie(title, description, length, rating);
             movieRepo.save(newMovie);
             return newMovie;
         }
