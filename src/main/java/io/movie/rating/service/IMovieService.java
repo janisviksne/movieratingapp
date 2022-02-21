@@ -9,7 +9,8 @@ public interface IMovieService {
 
     ArrayList<Movie> selectAllMovies();
     Movie selectOneMovieById(int id) throws Exception;
-    Movie addNewMovie(String title, String description, double length, float rating) throws Exception;
-    boolean deleteMovieByTitle(String title);
+    void addNewMovie(String title, String description, double length, float rating) throws Exception;
+    void deleteMovieById(int id);
+    void updateMovieById(int id, float rating) throws Exception;
 
 }

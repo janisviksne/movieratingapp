@@ -31,6 +31,6 @@ public class Movie {
         this.title = title;
         this.description = description;
         this.length = length;
-        this.rating = 0;
+        this.rating = rating;
     }
 }

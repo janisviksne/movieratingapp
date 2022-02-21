@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -15,7 +16,6 @@ public class MovieController {
 
     @Autowired
     private IMovieService movieService;
-
 
     @GetMapping("/show-all-movies")
     public String showAllMovies(Model model) {
@@ -37,19 +37,25 @@ public class MovieController {
             return "add-new-movie";
         }
     }
-    @GetMapping("/delete-movie")
-    public String getDeleteMovie (Model model){
-        model.addAttribute("movie", movieService.selectAllMovies());
-        return "delete-movie";
+
+    @GetMapping("/delete-movie/{id}")
+    public String getDeleteMovie(@PathVariable("id") int id, Model model) throws Exception {
+        model.addAttribute("movie", movieService.selectOneMovieById(id));
+        movieService.deleteMovieById(id);
+        return "redirect:/show-all-movies";
     }
 
-    @PostMapping("/delete-movie")
-    public String postDeleteMovie(Movie movie){
-        if(movieService.deleteMovieByTitle(movie.getTitle())){
-            return "redirect:/show-all-movies";
-        } else {
-            return "error-page";
-        }
+    @GetMapping("/rate-movie/{id}")
+    public String getRateMovie(@PathVariable("id") int id, Model model) throws Exception {
+        model.addAttribute("movie", movieService.selectOneMovieById(id));
+        return "rate-movie";
+    }
+
+    @PostMapping("/rate-movie/{id}")
+    public String postRateMovie(@PathVariable("id") int id, Movie movie) throws Exception {
+        //Movie updateMovie = movieService.selectOneMovieById(id);
+        movieService.updateMovieById(id, movie.getRating());
+        return "redirect:/show-all-movies";
     }
 
 
