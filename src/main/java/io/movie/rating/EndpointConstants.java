@@ -7,4 +7,7 @@ package io.movie.rating;
     public static final String ADD_NEW_MOVIE = "add-new-movie";
     public static final String MOVIE = "movie";
 
+    private EndpointConstants(){
+
+    }
 }
