@@ -49,6 +49,7 @@ For this application I used 2 Jenkins builds. One for test execution, second for
 ![jenkins](https://user-images.githubusercontent.com/73493967/165555106-1a232d02-b622-4a65-9ae8-0a0b5a86c6a7.png)
 
 And finally the executed SonarQube scan provides such results:
+APOLOGIZE ABOUT THE QUALITY, THE SNIPPING TOOL DOES NOT SUPPORT HQ IMAGES WITHIN SONARQUBE. 
 ![sonar_scan](https://user-images.githubusercontent.com/73493967/165555717-b92bd68b-4c25-435f-adb1-d98c524a39b7.png)
 ![sonar_scan2](https://user-images.githubusercontent.com/73493967/165555722-233531d6-1db8-4216-95a8-d9f9dcfc9c7c.png)
 
