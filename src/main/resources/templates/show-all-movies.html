@@ -34,7 +34,7 @@ table, th, td {
             <th th:text="${temp.getRating()}" id="getRating"></th>
             <th onclick="return confirm('Delete?')" id="delete"> <a href="delete-movie.html"
                                                         th:href="@{http://localhost:8080/movie-ratings/delete-movie/{id}(id=${temp.getMovieID()})}" class="btn btn-danger">Delete</a></th>
-            <th><a id="rate" href="rate-movie.html" th:href="@{http://localhost:8080/movie-ratings/rate-movie/{id}(id=${temp.getMovieID()})}" class="btn btn-primary">Rate</a></th>
+            <th id="rate"><a href="rate-movie.html" th:href="@{http://localhost:8080/movie-ratings/rate-movie/{id}(id=${temp.getMovieID()})}" class="btn btn-primary">Rate</a></th>
         </tr>
     </table>
 </div>
