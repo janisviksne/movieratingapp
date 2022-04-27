@@ -1,9 +1,9 @@
 package io.movie.rating.repository;
 
 import io.movie.rating.model.Movie;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IMovieRepo extends CrudRepository<Movie, Integer> {
+public interface IMovieRepo extends JpaRepository<Movie, Integer> {
 
     Movie findByTitleAndDescription(String title, String description);
 }

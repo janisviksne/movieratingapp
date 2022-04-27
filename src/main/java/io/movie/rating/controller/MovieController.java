@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class MovieController {
 
@@ -29,7 +31,7 @@ public class MovieController {
     }
 
     @PostMapping("/add-new-movie")
-    public String postAddNewMovie(@Validated Movie movie, BindingResult bindingResult) throws Exception {
+    public String postAddNewMovie(Movie movie, BindingResult bindingResult) throws Exception {
         if (!bindingResult.hasErrors()) {
             movieService.addNewMovie(movie.getTitle(), movie.getDescription(), movie.getLength(), movie.getRating());
             return "redirect:/show-all-movies";
@@ -53,7 +55,6 @@ public class MovieController {
 
     @PostMapping("/rate-movie/{id}")
     public String postRateMovie(@PathVariable("id") int id, Movie movie) throws Exception {
-        //Movie updateMovie = movieService.selectOneMovieById(id);
         movieService.updateMovieById(id, movie.getRating());
         return "redirect:/show-all-movies";
     }

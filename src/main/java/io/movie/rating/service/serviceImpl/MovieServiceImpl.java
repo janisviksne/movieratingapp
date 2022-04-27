@@ -25,16 +25,16 @@ public class MovieServiceImpl implements IMovieService {
         if(movieRepo.existsById(id)){
             return movieRepo.findById(id).orElse(null);
         } else {
-            throw new Exception("This movie cannot be found!");
+            throw new Exception("Movie was not found!");
         }
     }
 
     @Override
-    public void addNewMovie(String title, String description, double length, float rating) {
+    public void addNewMovie(String title, String description, double length, float rating) throws Exception {
         Movie findMovie = movieRepo.findByTitleAndDescription(title, description);
 
-        if (!Objects.isNull(findMovie)){
-            System.out.println("This movie already exists!");
+        if (Objects.nonNull(findMovie)){
+            throw new Exception("Such movie already exists!");
         } else{
             Movie newMovie = new Movie(title, description, length, rating);
             movieRepo.save(newMovie);
@@ -52,7 +52,7 @@ public class MovieServiceImpl implements IMovieService {
     @Override
     public void updateMovieById(int id, float rating) throws Exception {
         Movie updateMovie = movieRepo.findById(id).orElse(null);
-        if(!Objects.isNull(updateMovie)){
+        if(Objects.nonNull(updateMovie)){
             updateMovie.setRating(rating);
             movieRepo.save(updateMovie);
         } else {

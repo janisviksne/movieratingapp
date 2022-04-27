@@ -10,23 +10,24 @@
 <body>
 <div class="container">
     <form action="#" th:action="@{/add-new-movie}" th:object="${movie}" method="post">
-
         <div class="mb-3 col-4">
             <label class="form-label">Title</label>
+            <br>
             <input type="text" th:field="*{title}">
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
         </div>
         <div class="mb-3 col-4">
             <label class="form-label">Description</label>
+            <br>
             <input type="text" th:field="*{description}">
             <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
         </div>
         <div class="mb-3 col-4">
             <label class="form-label">Length</label>
+            <br>
             <input type="text" th:field="*{length}">
             <p th:if="${#fields.hasErrors('length')}" th:errors="*{length}"></p>
         </div>
-
         <button type="submit" class="btn btn-success">Add movie</button>
     </form>
 </div>

@@ -26,15 +26,18 @@ table, th, td {
         <tr th:each="temp: ${movie}">
             <th th:text="${temp.getTitle()}"></th>
             <th th:text="${temp.getDescription()}"></th>
-            <th th:text="${temp.getLength()}"><p>h</p></th>
+            <th th:text="${temp.getLength()} + ' ' + hours"></th>
             <th th:text="${temp.getRating()}"></th>
             <th onclick="return confirm('Delete?')"> <a href="delete-movie.html"
                                                         th:href="@{http://localhost:8080/movie-ratings/delete-movie/{id}(id=${temp.getMovieID()})}" class="btn btn-danger">Delete</a></th>
             <th><a href="rate-movie.html" th:href="@{http://localhost:8080/movie-ratings/rate-movie/{id}(id=${temp.getMovieID()})}" class="btn btn-primary">Rate</a></th>
         </tr>
     </table>
+</div>
+<div class="col text-center">
     <a href="add-new-movie" class="btn btn-primary">Add movie</a>
 </div>
+
 
 </body>
 </html>
