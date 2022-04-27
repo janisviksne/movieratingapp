@@ -1,10 +1,10 @@
-package io.movie.rating.service.serviceImpl;
+package io.movie.rating.service.service_impl;
 
 import io.movie.rating.model.Movie;
 import io.movie.rating.repository.IMovieRepo;
 import io.movie.rating.service.IMovieService;
-import io.movie.rating.utils.exceptions.MovieAlreadyExistsException;
-import io.movie.rating.utils.exceptions.MovieIdNotFoundException;
+import io.movie.rating.exceptions.MovieAlreadyExistsException;
+import io.movie.rating.exceptions.MovieIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;

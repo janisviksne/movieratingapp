@@ -1,7 +1,7 @@
 package io.movie.rating.controller;
 
 import io.movie.rating.model.Movie;
-import io.movie.rating.service.serviceImpl.MovieServiceImpl;
+import io.movie.rating.service.service_impl.MovieServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

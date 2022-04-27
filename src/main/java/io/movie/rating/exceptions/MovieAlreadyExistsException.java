@@ -1,4 +1,4 @@
-package io.movie.rating.utils.exceptions;
+package io.movie.rating.exceptions;
 
 public class MovieAlreadyExistsException extends RuntimeException{
     public MovieAlreadyExistsException(String message){
