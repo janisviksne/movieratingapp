@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static io.movie.rating.utils.constants.ControllerEndpoints.*;
-import static io.movie.rating.utils.constants.ModelAttributeConstants.MOVIE;
 
 @Controller
 public class MovieController {
-
+    public static final String SHOW_ALL_MOVIES = "show-all-movies";
+    public static final String REDIRECT_SHOW_ALL_MOVIES = "redirect:/show-all-movies";
+    public static final String ADD_NEW_MOVIE = "add-new-movie";
+    public static final String MOVIE = "movie";
     @Autowired
     private IMovieService movieService;
 
@@ -32,7 +33,7 @@ public class MovieController {
     }
 
     @PostMapping("/add-new-movie")
-    public String postAddNewMovie(@Validated Movie movie, BindingResult bindingResult) throws Exception {
+    public String postAddNewMovie(@Validated Movie movie, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             movieService.addNewMovie(movie.getTitle(), movie.getDescription(), movie.getLength(), movie.getRating());
             return REDIRECT_SHOW_ALL_MOVIES;
@@ -42,20 +43,20 @@ public class MovieController {
     }
 
     @GetMapping("/delete-movie/{id}")
-    public String getDeleteMovie(@PathVariable("id") int id, Model model) throws Exception {
+    public String getDeleteMovie(@PathVariable("id") int id, Model model) {
         model.addAttribute(MOVIE, movieService.selectOneMovieById(id));
         movieService.deleteMovieById(id);
         return REDIRECT_SHOW_ALL_MOVIES;
     }
 
     @GetMapping("/rate-movie/{id}")
-    public String getRateMovie(@PathVariable("id") int id, Model model) throws Exception {
+    public String getRateMovie(@PathVariable("id") int id, Model model) {
         model.addAttribute(MOVIE, movieService.selectOneMovieById(id));
         return "rate-movie";
     }
 
     @PostMapping("/rate-movie/{id}")
-    public String postRateMovie(@PathVariable("id") int id, Movie movie) throws Exception {
+    public String postRateMovie(@PathVariable("id") int id, Movie movie) {
         movieService.updateMovieById(id, movie.getRating());
         return REDIRECT_SHOW_ALL_MOVIES;
     }

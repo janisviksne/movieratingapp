@@ -3,6 +3,8 @@ package io.movie.rating.service.serviceImpl;
 import io.movie.rating.model.Movie;
 import io.movie.rating.repository.IMovieRepo;
 import io.movie.rating.service.IMovieService;
+import io.movie.rating.utils.exceptions.MovieAlreadyExistsException;
+import io.movie.rating.utils.exceptions.MovieIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -21,20 +23,20 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
-    public Movie selectOneMovieById(int id) throws Exception {
+    public Movie selectOneMovieById(int id) {
         if(movieRepo.existsById(id)){
             return movieRepo.findById(id).orElse(null);
         } else {
-            throw new Exception("Movie was not found!");
+            throw new MovieIdNotFoundException("Incorrect id!");
         }
     }
 
     @Override
-    public Movie addNewMovie(String title, String description, double length, double rating) throws Exception {
+    public Movie addNewMovie(String title, String description, double length, double rating) {
         Movie findMovie = movieRepo.findByTitleAndDescription(title, description);
 
         if (Objects.nonNull(findMovie)){
-            throw new Exception("Such movie already exists!");
+            throw new MovieAlreadyExistsException("Such movie already exists!");
         } else{
             Movie newMovie = new Movie(title, description, length, rating);
             movieRepo.save(newMovie);
@@ -54,13 +56,13 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
-    public void updateMovieById(int id, double rating) throws Exception {
+    public void updateMovieById(int id, double rating) {
         Movie updateMovie = movieRepo.findById(id).orElse(null);
         if(Objects.nonNull(updateMovie)){
             updateMovie.setRating(rating);
             movieRepo.save(updateMovie);
         } else {
-            throw new Exception("Incorrect id!");
+            throw new MovieIdNotFoundException("Incorrect id!");
         }
     }
 }

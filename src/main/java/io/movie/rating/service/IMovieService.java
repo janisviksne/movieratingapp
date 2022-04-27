@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public interface IMovieService {
 
     ArrayList<Movie> selectAllMovies();
-    Movie selectOneMovieById(int id) throws Exception;
-    Movie addNewMovie(String title, String description, double length, double rating) throws Exception;
+    Movie selectOneMovieById(int id);
+    Movie addNewMovie(String title, String description, double length, double rating);
     boolean deleteMovieById(int id);
-    void updateMovieById(int id, double rating) throws Exception;
+    void updateMovieById(int id, double rating);
 
 }
