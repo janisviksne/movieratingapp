@@ -39,9 +39,9 @@ public class Movie {
     @Valid
     @Min(value = 0, message = "Rating cannot be lower than 0!")
     @Max(value = 10, message = "Rating cannot be higher than 10!")
-    private float rating;
+    private double rating;
 
-    public Movie(String title, String description, double length, float rating) {
+    public Movie(String title, String description, double length, double rating) {
         this.title = title;
         this.description = description;
         this.length = length;

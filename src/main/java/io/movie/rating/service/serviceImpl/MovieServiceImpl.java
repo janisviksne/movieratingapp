@@ -30,7 +30,7 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
-    public void addNewMovie(String title, String description, double length, float rating) throws Exception {
+    public Movie addNewMovie(String title, String description, double length, double rating) throws Exception {
         Movie findMovie = movieRepo.findByTitleAndDescription(title, description);
 
         if (Objects.nonNull(findMovie)){
@@ -38,19 +38,23 @@ public class MovieServiceImpl implements IMovieService {
         } else{
             Movie newMovie = new Movie(title, description, length, rating);
             movieRepo.save(newMovie);
+            return newMovie;
         }
     }
 
     @Override
-    public void deleteMovieById(int id) {
+    public boolean deleteMovieById(int id) {
         Movie deleteMovie = movieRepo.findById(id).orElse(null);
         if(!Objects.isNull(deleteMovie)){
             movieRepo.delete(deleteMovie);
+            return true;
+        } else{
+            return false;
         }
     }
 
     @Override
-    public void updateMovieById(int id, float rating) throws Exception {
+    public void updateMovieById(int id, double rating) throws Exception {
         Movie updateMovie = movieRepo.findById(id).orElse(null);
         if(Objects.nonNull(updateMovie)){
             updateMovie.setRating(rating);
