@@ -10,7 +10,7 @@ Used technologies:
   4) Maven
   5) Jenkins
   6) SonarQube
-  7) Mockito (for testing)
+  7) MockMVC (for testing)
 
 Entrypoint for using the website once launched locally:
  http://localhost:8080/movie-ratings/show-all-movies
