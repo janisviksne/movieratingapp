@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static io.movie.rating.Constants.*;
+
 
 @Controller
 public class MovieController {
-    public static final String SHOW_ALL_MOVIES = "show-all-movies";
-    public static final String REDIRECT_SHOW_ALL_MOVIES = "redirect:/show-all-movies";
-    public static final String ADD_NEW_MOVIE = "add-new-movie";
-    public static final String MOVIE = "movie";
+
     @Autowired
     private IMovieService movieService;
 

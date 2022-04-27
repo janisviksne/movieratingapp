@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.movie.rating.Constants.MOVIE;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,7 +35,7 @@ class MovieControllerEndpointTests {
         when(movieServiceImpl.selectAllMovies()).thenReturn(new ArrayList<>(List.of(testDeleteMovie)));
         this.mockMvc.perform(MockMvcRequestBuilders.get("/show-all-movies"))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attributeExists("movie"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists(MOVIE))
                 .andExpect(MockMvcResultMatchers.view().name("show-all-movies"));
     }
 
@@ -49,7 +50,7 @@ class MovieControllerEndpointTests {
     void shouldAttemptToDeleteExistingMovie() throws Exception{
         when(movieServiceImpl.deleteMovieById(testDeleteMovie.getMovieID())).thenReturn(true);
         mockMvc.perform(MockMvcRequestBuilders.get("/delete-movie/{id}", testDeleteMovie.getMovieID()))
-                .andExpect(MockMvcResultMatchers.model().attribute("movie", movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
+                .andExpect(MockMvcResultMatchers.model().attribute(MOVIE, movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
                 .andExpect(MockMvcResultMatchers.model().hasNoErrors())
                 .andExpect(redirectedUrl("/show-all-movies"));
     }
@@ -59,7 +60,7 @@ class MovieControllerEndpointTests {
         when(movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())).thenReturn(testDeleteMovie);
         this.mockMvc.perform(MockMvcRequestBuilders.get("/rate-movie/{id}", testDeleteMovie.getMovieID()))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attribute("movie", movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
+                .andExpect(MockMvcResultMatchers.model().attribute(MOVIE, movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
                 .andExpect(MockMvcResultMatchers.view().name("rate-movie"));
     }
 }
