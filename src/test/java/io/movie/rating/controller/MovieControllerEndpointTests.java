@@ -31,36 +31,52 @@ class MovieControllerEndpointTests {
     Movie testDeleteMovie = new Movie("Jackass", "Id rather not", 2.0, 10);
 
     @Test
-    void shouldReturnViewWithAllMovies() throws Exception {
+    void shouldReturnViewWithAllMovies() {
         when(movieServiceImpl.selectAllMovies()).thenReturn(new ArrayList<>(List.of(testDeleteMovie)));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/show-all-movies"))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attributeExists(MOVIE))
-                .andExpect(MockMvcResultMatchers.view().name("show-all-movies"));
+        try {
+            this.mockMvc.perform(MockMvcRequestBuilders.get("/show-all-movies"))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.model().attributeExists(MOVIE))
+                    .andExpect(MockMvcResultMatchers.view().name("show-all-movies"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    void shouldReturnViewWithAddNewMovie() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/add-new-movie"))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("add-new-movie"));
+    void shouldReturnViewWithAddNewMovie() {
+        try {
+            this.mockMvc.perform(MockMvcRequestBuilders.get("/add-new-movie"))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.view().name("add-new-movie"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    void shouldAttemptToDeleteExistingMovie() throws Exception{
+    void shouldAttemptToDeleteExistingMovie() {
         when(movieServiceImpl.deleteMovieById(testDeleteMovie.getMovieID())).thenReturn(true);
-        mockMvc.perform(MockMvcRequestBuilders.get("/delete-movie/{id}", testDeleteMovie.getMovieID()))
-                .andExpect(MockMvcResultMatchers.model().attribute(MOVIE, movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
-                .andExpect(MockMvcResultMatchers.model().hasNoErrors())
-                .andExpect(redirectedUrl("/show-all-movies"));
+        try {
+            mockMvc.perform(MockMvcRequestBuilders.get("/delete-movie/{id}", testDeleteMovie.getMovieID()))
+                    .andExpect(MockMvcResultMatchers.model().attribute(MOVIE, movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
+                    .andExpect(MockMvcResultMatchers.model().hasNoErrors())
+                    .andExpect(redirectedUrl("/show-all-movies"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    void shouldReturnViewWithUpdateMovieById() throws Exception{
+    void shouldReturnViewWithUpdateMovieById() {
         when(movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())).thenReturn(testDeleteMovie);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/rate-movie/{id}", testDeleteMovie.getMovieID()))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attribute(MOVIE, movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
-                .andExpect(MockMvcResultMatchers.view().name("rate-movie"));
+        try {
+            this.mockMvc.perform(MockMvcRequestBuilders.get("/rate-movie/{id}", testDeleteMovie.getMovieID()))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.model().attribute(MOVIE, movieServiceImpl.selectOneMovieById(testDeleteMovie.getMovieID())))
+                    .andExpect(MockMvcResultMatchers.view().name("rate-movie"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
