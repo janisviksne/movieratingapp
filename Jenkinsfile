@@ -6,6 +6,11 @@ pipeline {
                 git url: 'https://github.com/janisviksne/movieratingapp.git'
             }
         }
+        stage('Run tests') {
+            steps {
+                sh "./mvnw -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
